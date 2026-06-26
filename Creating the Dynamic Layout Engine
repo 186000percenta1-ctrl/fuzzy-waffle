@@ -1,0 +1,94 @@
+import 'package:flutter/material.dart';
+
+class DynamicArticleReader extends StatelessWidget {
+  final ArticleData article;
+
+  const DynamicArticleReader({Key? key, required this.article}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        leading: const BackButton(color: Colors.black),
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 12.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Article Header Space
+            Text(
+              article.title,
+              style: const TextStyle(fontSize: 26, fontWeight: FontWeight.bold, height: 1.2),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              article.subtitle,
+              style: TextStyle(fontSize: 14, color: Colors.grey[600], height: 1.4),
+            ),
+            const SizedBox(height: 12),
+            Text(
+              'By ${article.author} • ${article.date}',
+              style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: Colors.grey),
+            ),
+            const Divider(height: 32, thickness: 1),
+            
+            // Dynamic Stream of Blocks
+            ...article.blocks.map((block) => _renderBlock(block)).toList(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _renderBlock(ContentBlock block) {
+    switch (block.type) {
+      case BlockType.question:
+        return Padding(
+          padding: const EdgeInsets.only(top: 18.0, bottom: 6.0),
+          child: Text(
+            '${block.speaker ?? 'Q'}: ${block.text}',
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.blackde),
+          ),
+        );
+        
+      case BlockType.answer:
+        return Padding(
+          padding: const EdgeInsets.only(bottom: 12.0),
+          child: Text(
+            block.text,
+            style: TextStyle(fontSize: 15, color: Colors.grey[800], height: 1.5),
+          ),
+        );
+        
+      case BlockType.pullQuote:
+        return Container(
+          margin: const EdgeInsets.symmetric(vertical: 20.0),
+          padding: const EdgeInsets.all(16.0),
+          decoration: BoxDecoration(
+            color: Colors.grey[50],
+            border: const Border(left: BorderSide(color: Colors.pinkAccent, width: 4)),
+          ),
+          child: Text(
+            block.text,
+            style: const TextStyle(fontSize: 16, fontStyle: FontStyle.italic, color: Colors.black87, height: 1.4),
+          ),
+        );
+        
+      case BlockType.body:
+        return Padding(
+          padding: const EdgeInsets.only(bottom: 12.0),
+          child: Text(
+            block.text,
+            style: const TextStyle(fontSize: 15, color: Colors.black87, height: 1.5),
+          ),
+        );
+        
+      default:
+        return const SizedBox.shrink();
+    }
+  }
+}
