@@ -1,0 +1,25 @@
+final sampleArticle = ArticleData(
+  title: "Lana Rhoades Is A Multi-Millionaire After Quitting Porn",
+  subtitle: "This is the exclusive interview granted during her visit to Sydney as part of 2018's Sexpo convention.",
+  author: "Staff",
+  date: "23 APRIL 2021",
+  blocks: [
+    ContentBlock(
+      type: BlockType.body,
+      text: "Since quitting porn - citing lack of payment and being left 'traumatised' - former Pornhub star Lana Rhoades has become a multimillionaire...",
+    ),
+    ContentBlock(
+      type: BlockType.question,
+      speaker: "B.H.",
+      text: "Have you found the job has changed much since you first entered the industry?",
+    ),
+    ContentBlock(
+      type: BlockType.answer,
+      text: "Well, the type of work I’m doing has changed. I actually don’t really shoot scenes anymore. Plus, the industry is now moving in a direction where girls are shooting their own content...",
+    ),
+    ContentBlock(
+      type: BlockType.pullQuote,
+      text: "\"Basically, something I didn’t realise when I first started – is that you’re the boss...\"",
+    ),
+  ],
+);
