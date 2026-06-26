@@ -1,0 +1,29 @@
+enum BlockType { header, metadata, question, answer, pullQuote, body }
+
+class ContentBlock {
+  final BlockType type;
+  final String text;
+  final String? speaker; // E.g., "B.H." or "Lana Rhoades"
+
+  ContentBlock({
+    required this.type,
+    required this.text,
+    this.speaker,
+  });
+}
+
+class ArticleData {
+  final String title;
+  final String subtitle;
+  final String author;
+  final String date;
+  final List<ContentBlock> blocks;
+
+  ArticleData({
+    required this.title,
+    required this.subtitle,
+    required this.author,
+    required this.date,
+    required this.blocks,
+  });
+}
