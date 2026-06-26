@@ -1,0 +1,164 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+      ),
+      home: const ArticlePage(),
+    );
+  }
+}
+
+class ArticlePage extends StatelessWidget {
+  const ArticlePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        leading: const Icon(Icons.arrow_back),
+        title: const Text('HUSTLE', style: TextStyle(fontWeight: FontWeight.bold, letterSpacing: 1.5)),
+        actions: [
+          IconButton(icon: const Icon(Icons.bookmark_border), onPressed: () {}),
+          IconButton(icon: const Icon(Icons.share), onPressed: () {}),
+        ],
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Category/Tag
+            Text(
+              "HUSTLE",
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.primary,
+                fontWeight: FontWeight.bold,
+                fontSize: 14,
+              ),
+            ),
+            const SizedBox(height: 8),
+            
+            // Title
+            const Text(
+              "Lana Rhoades Is A Multi-Millionaire After Quitting Porn",
+              style: TextStyle(
+                fontSize: 26,
+                fontWeight: FontWeight.bold,
+                height: 1.2,
+              ),
+            ),
+            const SizedBox(height: 12),
+            
+            // Subtitle / Intro
+            Text(
+              "This is the only and exclusive interview granted by American adult-film actress Lana Rhoades during her visit to Sydney as part of 2018's Sexpo convention.",
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.grey[700],
+                fontStyle: FontStyle.italic,
+              ),
+            ),
+            const SizedBox(height: 16),
+            
+            // Author and Date Row
+            Row(
+              children: [
+                const CircleAvatar(child: Text("BH")),
+                const SizedBox(width: 12),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text("By Staff", style: TextStyle(fontWeight: FontWeight.bold)),
+                    Text("23 APRIL 2021 · 4 MIN READ", style: TextStyle(color: Colors.grey[600], fontSize: 12)),
+                  ],
+                ),
+              ],
+            ),
+            const Divider(height: 32),
+            
+            // Article Body Paragraphs
+            _buildParagraph(
+              "Since quitting porn - citing lack of payment and being left \"traumatised\" - former Pornhub star Lana Rhoades has become a multimillionaire, generating substantial revenue from her 15m strong Instagram and OnlyFans accounts and lucrative brand deals with companies including Fashion Nova."
+            ),
+            _buildParagraph(
+              "Reportedly, Lana now earns roughly \$30,000 per post on Instagram and has more than 25,000 subscribers on her OnlyFans account. In November 2020, she confirmed she was generating over \$1 million a month from her OnlyFans alone."
+            ),
+            
+            const Divider(height: 32),
+            
+            // Interview Section Header
+            const Text(
+              "The Interview: Sydney Sexpo",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 16),
+
+            // Interview Q&A Blocks
+            _buildQuestion("How’s the Australian Sexpo been compared to some of the other festivals and events that you’ve been to?"),
+            _buildAnswer("I like this convention the best. For some reason the fans in Australia are really respectful, I’ve had problems with people grabbing and groping me at other shows without my permission. In Australia, everyone that comes and sits next to me doesn’t try and touch me inappropriately."),
+            
+            _buildQuestion("Is that one of the downsides of the job?"),
+            _buildAnswer("That’s one thing I don’t like sometimes, because fans are just used to seeing me on the internet... they don’t really realise that it’s a person. I don’t think they even think they need to ask for permission, they just assume I’ll be fine with it."),
+            
+            _buildQuestion("Have you found the job has changed much since you first entered the industry?"),
+            _buildAnswer("Well, the type of work I’m doing has changed. I actually don’t really shoot scenes anymore. Plus, the industry is now moving in a direction where girls are shooting their own content. They are directing their own stuff at home, doing whatever they want. Honestly, I make more doing that than I ever did doing scenes."),
+            
+            _buildQuestion("And, finally, what advice would you give to any young girl that’s considering getting into the industry?"),
+            _buildAnswer("Basically, something I didn’t realise when I first started – is that you’re the boss, not your agent, no one else, so don’t let them tell you what to do. Make sure that you’re having fun and if you’re not comfortable with something, don’t do it."),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // Helper builder for regular article paragraphs
+  Widget _buildParagraph(String text) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 16.0),
+      child: Text(
+        text,
+        style: const TextStyle(fontSize: 16, height: 1.5, Colors: Colors.black87),
+      ),
+    );
+  }
+
+  // Helper builder for interview questions (styled as a blockquote callout)
+  Widget _buildQuestion(String question) {
+    return Container(
+      width: double.infinity,
+      margin: const EdgeInsets.only(bottom: 8.0, top: 8.0),
+      padding: const EdgeInsets.all(12.0),
+      decoration: BoxDecoration(
+        color: Colors.grey[200],
+        border: const Border(left: BorderSide(color: Colors.deepPurple, width: 4)),
+      ),
+      child: Text(
+        question,
+        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, fontStyle: FontStyle.italic),
+      ),
+    );
+  }
+
+  // Helper builder for interview answers
+  Widget _buildAnswer(String answer) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 4.0, bottom: 20.0),
+      child: Text(
+        answer,
+        style: const TextStyle(fontSize: 16, height: 1.5),
+      ),
+    );
+  }
+}
